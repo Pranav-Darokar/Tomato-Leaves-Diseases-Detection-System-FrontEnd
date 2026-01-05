@@ -1,16 +1,34 @@
-# React + Vite
+# Tomato-Leaves-Diseases-Detection-System-FrontEnd
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project provides a React frontend for the Tomato Leaf Diseases detection model. It uses Vite for a fast development experience.
 
-Currently, two official plugins are available:
+## Features
+- **Disease Detection**: Upload images of tomato leaves to detect diseases.
+- **Real-time Results**: Get instant analysis and treatment recommendations.
+- **Interactive Gallery**: View common diseases and healthy plant examples.
+- **Premium UI**: Modern, responsive design with animations and glassmorphism.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- React
+- Vite
+- Lucide React (Icons)
+- CSS3 (Animations, Gradients)
 
-## React Compiler
+## Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1.  **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-## Expanding the ESLint configuration
+2.  **Run development server**:
+    ```bash
+    npm run dev
+    ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development Info
+
+Currently, two official plugins are available for React in Vite:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
