@@ -22,8 +22,16 @@ const Detection = () => {
     const handleAnalyze = async (file) => {
         setIsAnalyzing(true);
         try {
-            // Simulate API call
+            // Call API with validation
             const response = await analyzeImage(file);
+
+            if (!response.success) {
+                // Handle validation error
+                alert(response.error);
+                resetAnalysis();
+                return;
+            }
+
             if (response.success) {
                 // Add artificial delay for "scanning" effect
                 await new Promise(resolve => setTimeout(resolve, 1500));
@@ -32,6 +40,7 @@ const Detection = () => {
         } catch (error) {
             console.error("Analysis failed:", error);
             alert("Failed to analyze image. Please try again.");
+            resetAnalysis();
         } finally {
             setIsAnalyzing(false);
         }
@@ -46,7 +55,7 @@ const Detection = () => {
     return (
         <div className="detection-page container animate-fade-in">
             <div className="detection-header">
-                <h1>Disease Dectection</h1>
+                <h1>Disease Detection</h1>
                 <p>Upload a clear photo of the tomato leaf for instant analysis</p>
             </div>
 
