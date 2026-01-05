@@ -105,7 +105,7 @@ const Home = () => {
                         </div>
                     </div>
                     <div className="gallery-item glass-panel">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo3AIbRnB4Y2O-YHpU2hMJ2gTnt3GadfrcPA&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRogJnTXJxcdK2fGf0vh21q_4q72JEu-3NwUvHGc8Vb-KMWwnLxThthpFKb6p_myXjWH8Bnhogn46C5cc68D-yG4TV6hLpH_mJkPoyHnl7g1g&s=10" alt="Yellow Leaf Curl" />
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo3AIbRnB4Y2O-YHpU2hMJ2gTnt3GadfrcPA&s" alt="Leaf Mold" />
                         <div className="gallery-overlay">
                             <h3>Leaf Mold</h3>
                             <span>Detect & Cure</span>
