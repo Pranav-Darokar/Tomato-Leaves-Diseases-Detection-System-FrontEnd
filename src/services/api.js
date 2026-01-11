@@ -14,31 +14,53 @@ const validateLeafImage = async (file) => {
                 canvas.height = img.height;
                 ctx.drawImage(img, 0, 0);
 
-                // Sample pixels to check for green/leaf-like colors
+                // Sample pixels to check for leaf-like characteristics
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 const pixels = imageData.data;
 
-                let greenPixels = 0;
+                let leafLikePixels = 0;
                 let totalPixels = pixels.length / 4;
+                let colorVariation = 0;
+                let prevPixel = null;
 
-                // Check for green-ish pixels (common in leaves)
+                // Check for leaf-like color patterns
                 for (let i = 0; i < pixels.length; i += 4) {
                     const r = pixels[i];
                     const g = pixels[i + 1];
                     const b = pixels[i + 2];
+                    const a = pixels[i + 3];
 
-                    // Check if pixel is greenish or brownish (diseased leaves)
-                    // Green: g > r && g > b
-                    // Brown/Yellow (diseased): r > 100 && g > 80
-                    if ((g > r && g > b && g > 50) || (r > 100 && g > 80 && Math.abs(r - g) < 50)) {
-                        greenPixels++;
+                    // Skip transparent/nearly transparent pixels
+                    if (a < 128) continue;
+
+                    // Check if pixel is in leaf color range
+                    // Healthy leaf: medium to dark green
+                    // Diseased leaf: yellow, brown, dark spots
+                    const isGreen = g > r && g > b && g > 70 && r < 180 && b < 180;
+                    const isYellowBrown = (r > 140 && g > 100 && b < 100) || (r > 160 && g > 120 && b < 80);
+                    const isDarkSpot = r < 80 && g < 80 && b < 80;
+                    const isLightGreen = g > 90 && r < g && b < g && (r + b) < 200;
+
+                    if (isGreen || isYellowBrown || isDarkSpot || isLightGreen) {
+                        leafLikePixels++;
                     }
+
+                    // Track color variation for texture
+                    if (prevPixel) {
+                        const diff = Math.abs(r - prevPixel.r) + Math.abs(g - prevPixel.g) + Math.abs(b - prevPixel.b);
+                        if (diff > 10) colorVariation++;
+                    }
+                    prevPixel = { r, g, b };
                 }
 
-                const greenPercentage = (greenPixels / totalPixels) * 100;
+                const leafPercentage = (leafLikePixels / totalPixels) * 100;
+                const variationPercentage = (colorVariation / totalPixels) * 100;
 
-                // If less than 15% green/brown pixels, likely not a leaf
-                resolve(greenPercentage > 15);
+                // Stricter validation:
+                // Need at least 30% leaf-like colors AND reasonable texture variation (at least 20%)
+                const isLeaf = leafPercentage > 30 && variationPercentage > 20;
+
+                resolve(isLeaf);
             };
             img.src = e.target.result;
         };
